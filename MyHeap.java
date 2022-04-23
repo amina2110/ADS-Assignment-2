@@ -7,10 +7,12 @@ public class MyHeap<T extends Comparable<T>> {
         arr.add(item);
     }
 
-    public T removeRoot(){
+   public T removeRoot(){
         heapify();
         T item = arr.get(0);
         arr.remove(0);
+        arr.add(arr.get(arr.size()-2),0);
+        arr.remove(arr.size()-2);
         heapify();
         return item;
     }
@@ -26,6 +28,9 @@ public class MyHeap<T extends Comparable<T>> {
 
     private void heapify(){
         int i = 0;
+        int j = 0;
+        while (j<arr.size()){
+            i=0;
         while(i<arr.size()) {
                 if (leftChildIndex(i) < arr.size()) {
                     if (arr.get(i).compareTo(arr.get(leftChildIndex(i))) > 0) {
@@ -43,10 +48,12 @@ public class MyHeap<T extends Comparable<T>> {
                     }
                 }
                 i++;
+            }
+        j++;
         }
 
     }
-
+    
     public int size(){
         return arr.size();
     }
